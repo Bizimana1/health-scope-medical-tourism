@@ -1,24 +1,55 @@
-import React, { ReactNode } from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
 import Image from 'next/image';
-
 import { AiOutlineMail, AiOutlineWhatsApp } from 'react-icons/ai';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 
-const prices = [{ price: 230.32 }, { price: 2130.04 }, { price: 4330.98 }];
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-const Contact = () => (
-  
-  
-  <>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log('Email sent successfully!');
+        // Optionally, reset form fields
+        setFormData({
+          fullName: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
     <div className='w-full mb-40 md:mb-0 flex justify-center'>
       <div className='container pb-10'>
         <div className='w-full mt-0 md:mt-40 h-max relative'>
           <div className='w-full mb-40 pt-40  h-screen relative flex justify-center'>
             <Image src='/images/map.svg' alt='map' fill priority />
           </div>
-
           <div className='w-full h-max px-5 md:px-10 z-10 absolute top-20 left-0 flex justify-center'>
             <div className='w-full h-max flex flex-col md:flex-row'>
               <div className='w-1/2 flex flex-col'>
@@ -38,7 +69,26 @@ const Contact = () => (
                       <AiOutlineWhatsApp />
                     </div>
                     <p className='text-gray-600 flex flex-col'>
-                    <span><a href={`https://wa.me/+250788411549`} target="_blank" rel="noopener noreferrer"> +250788411549</a></span><span> <a href={`https://wa.me/+250786837318`} target="_blank" rel="noopener noreferrer">+250786837318</a></span>
+                      <span>
+                        <a
+                          href={`https://wa.me/+250788411549`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          {' '}
+                          +250788411549
+                        </a>
+                      </span>
+                      <span>
+                        {' '}
+                        <a
+                          href={`https://wa.me/+250786837318`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          +250786837318
+                        </a>
+                      </span>
                     </p>
                   </div>
                   <div className='flex items-center gap-2'>
@@ -57,12 +107,15 @@ const Contact = () => (
                     <h1 className='text-teal-600'>Message </h1>
                   </span>
 
-                  <form className='w-full' action=''>
+                  <form className='w-full' onSubmit={handleSubmit}>
                     <span className='w-full flex flex-col gap-4'>
                       <div className='flex flex-col gap-2'>
                         <h1 className='text-sm text-gray-700'>Full name*</h1>
                         <input
+                          name='fullName'
                           className='border-b py-1 text-sm outline-none text-gray-600 bg-transparent border-gray-400'
+                          value={formData.fullName}
+                          onChange={handleChange}
                           placeholder='John Doe'
                           type='text'
                         />
@@ -72,7 +125,10 @@ const Contact = () => (
                           Email Address*
                         </h1>
                         <input
+                          name='email'
                           className='border-b py-1 text-sm outline-none text-gray-600 bg-transparent border-gray-400'
+                          value={formData.email}
+                          onChange={handleChange}
                           placeholder='john@gmail.com'
                           type='email'
                         />
@@ -80,7 +136,10 @@ const Contact = () => (
                       <div className='flex flex-col gap-2'>
                         <h1 className='text-sm text-gray-700'>Subject*</h1>
                         <input
+                          name='subject'
                           className='border-b py-1 text-sm outline-none text-gray-600 bg-transparent border-gray-400'
+                          value={formData.subject}
+                          onChange={handleChange}
                           placeholder='Product availability'
                           type='text'
                         />
@@ -90,7 +149,10 @@ const Contact = () => (
                           Your Message Here*
                         </h1>
                         <textarea
+                          name='message'
                           className='border-b h-32 py-1 text-sm outline-none text-gray-600 bg-transparent border-gray-400'
+                          value={formData.message}
+                          onChange={handleChange}
                           placeholder='e.g John Doe'
                           type='text'
                         />
@@ -110,7 +172,7 @@ const Contact = () => (
         </div>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 export default Contact;

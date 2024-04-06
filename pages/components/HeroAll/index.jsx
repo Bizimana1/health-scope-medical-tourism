@@ -1,7 +1,21 @@
 import React from 'react';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
 import Image from 'next/image';
 
-const HeroAll = ({ title,content }) => {
+const HeroAll = ({ title, content }) => {
+  const router = useRouter(); // Initialize useRouter hook
+
+  const handleHireUsClick = () => {
+    router.push('/en/contact/'); // Redirect to /en/contact/ when "Hire Us" is clicked
+  };
+
+  const handleReadMoreClick = () => {
+    window.scrollBy({
+      top: 300,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className='w-screen h-[600px] 2xl:h-[800px] bg-gray-600 relative flex items-center justify-center'>
       <div className='absolute w-full h-full'>
@@ -33,9 +47,17 @@ const HeroAll = ({ title,content }) => {
                 {content}
               </p>
 
-              <div className='px-10 mt-6 w-max rounded-full py-2 bg-teal-600 text-white'>
+              {title === 'Services' ? (
+                <div className='px-10 mt-6 w-max rounded-full py-2 bg-teal-600 text-white' onClick={handleHireUsClick}>
                 Hire Us
               </div>
+              ) : (
+                <div className='px-10 mt-6 w-max rounded-full py-2 bg-teal-600 text-white' onClick={handleReadMoreClick}>
+                  Read More
+                </div>
+              )}
+
+             
             </div>
           </div>
         </div>
