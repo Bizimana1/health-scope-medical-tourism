@@ -83,12 +83,12 @@ const Footer = () => {
                 <h2 className='mb-6 text-xl font-bold'>Support & Help</h2>
                 <ul>
                   <li>
-                    <a href='#' className='mb-2 inline-block text-base font-medium'>
+                    <a href='/en/services' className='mb-2 inline-block text-base font-medium'>
                       Services
                     </a>
                   </li>
                   <li>
-                    <a href='/nor/contact' className='mb-2 inline-block text-base font-medium'>
+                    <a href='/en/contact' className='mb-2 inline-block text-base font-medium'>
                       Contact
                     </a>
                   </li>

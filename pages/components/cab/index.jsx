@@ -32,8 +32,9 @@ const CAB = () => {
             </p>
             <h1 className='text-lg mb-2 font-bold text-gray-600'>Include.</h1>
             <p className='mb-4'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            We facilitate medical consultations and assist with hospital
+                admissions and medication for patients seeking healthcare
+                services abroad.
             </p>
 
             <Link href='/en/services'>
