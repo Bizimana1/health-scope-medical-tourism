@@ -14,15 +14,15 @@ export default async function handler(req, res) {
       port: 465, // Use SMTP port 465 for secure connection
       secure: true, // Set to true for secure connection
       auth: {
-        user: 'contact_us@healthscopemed.com',
-        pass: 'dv~ioYlCkHlg',
+        user: 'marketing@healthscopemed.com',
+        pass: 'Healthy-Marketing',
       },
     });
 
     // Define email options
     let mailOptions = {
-      from: 'contact_us@healthscopemed.com',
-      to: 'info@healthscopemed.com',
+      from: 'marketing@healthscopemed.com',
+      to: 'info.healthscopemed.com',
       subject: subject,
       text: `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`,
     };
