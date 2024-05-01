@@ -1,7 +1,6 @@
 
 
 // pages/api/sendEmail.js
-
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
@@ -11,8 +10,8 @@ export default async function handler(req, res) {
     // Create a Nodemailer transporter
     let transporter = nodemailer.createTransport({
       host: 'mail.healthscopemed.com',
-      port: 465, // Use SMTP port 465 for secure connection
-      secure: true, // Set to true for secure connection
+      port: 465,
+      secure: true,
       auth: {
         user: 'marketing@healthscopemed.com',
         pass: 'Healthy-Marketing',
@@ -22,22 +21,22 @@ export default async function handler(req, res) {
     // Define email options
     let mailOptions = {
       from: 'marketing@healthscopemed.com',
-      to: 'bizimanasalomon85@gmail.com',
+      to: 'bizimanasalomon85@gmail.com', // Corrected email address
       subject: subject,
       text: `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`,
     };
 
     // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-        res.status(500).json({ error: 'Failed to send email' });
-      } else {
-        console.log('Email sent:', info.response);
-        res.status(200).json({ success: true });
-      }
-    });
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email sent:', info.response);
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ error: 'Failed to send email', details: error.message });
+    }
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });
   }
 }
+
