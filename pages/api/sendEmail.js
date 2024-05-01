@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // Define email options
     let mailOptions = {
       from: 'marketing@healthscopemed.com',
-      to: 'info.healthscopemed.com',
+      to: 'bizimanasalomon85@gmail.com',
       subject: subject,
       text: `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`,
     };
