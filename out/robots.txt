@@ -1,0 +1,21 @@
+# *
+User-agent: *
+Disallow: /dashboard/*
+
+# *
+User-agent: *
+Disallow: /data
+
+# *
+User-agent: *
+Disallow: /dashboard
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.decarbonify.com
+
+# Sitemaps
+Sitemap: https://www.decarbonify.com/sitemap.xml
